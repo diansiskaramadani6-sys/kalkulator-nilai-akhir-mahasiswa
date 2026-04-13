@@ -83,43 +83,64 @@
 <body>
 
 <div class="container">
-  <h1>Nilai Akhir Mahasiswa</h1>
+  <h1>🎓 Nilai Akhir Mahasiswa</h1>
   <p>Rumus: (Tugas 30%) + (UTS 30%) + (UAS 40%)</p>
 
-  <form method="POST">
+  <form id="formNilai">
 
     <div class="input-group">
       <label>Nilai Tugas</label>
-      <input type="number" name="tugas" placeholder="Contoh: 80" required>
+      <input type="number" id="tugas" placeholder="Contoh: 80" required>
     </div>
 
     <div class="input-group">
       <label>Nilai UTS</label>
-      <input type="number" name="uts" placeholder="Contoh: 75" required>
+      <input type="number" id="uts" placeholder="Contoh: 75" required>
     </div>
 
     <div class="input-group">
       <label>Nilai UAS</label>
-      <input type="number" name="uas" placeholder="Contoh: 90" required>
+      <input type="number" id="uas" placeholder="Contoh: 90" required>
     </div>
 
     <button type="submit">Hitung Nilai</button>
 
   </form>
 
-  {% if hasil is not none %}
-    <div class="result">
-      🎓 Nilai Akhir: {{ hasil }}
-    </div>
-  {% endif %}
-
-  {% if error %}
-    <div class="error">
-      ⚠️ {{ error }}
-    </div>
-  {% endif %}
+  <div class="result" id="hasil"></div>
+  <div class="error" id="error"></div>
 
 </div>
+
+<script>
+document.getElementById("formNilai").addEventListener("submit", function(e) {
+  e.preventDefault();
+
+  let tugas = parseFloat(document.getElementById("tugas").value);
+  let uts = parseFloat(document.getElementById("uts").value);
+  let uas = parseFloat(document.getElementById("uas").value);
+
+  let hasilDiv = document.getElementById("hasil");
+  let errorDiv = document.getElementById("error");
+
+  hasilDiv.innerHTML = "";
+  errorDiv.innerHTML = "";
+
+  if (isNaN(tugas) || isNaN(uts) || isNaN(uas)) {
+    errorDiv.innerHTML = "⚠️ Semua input harus berupa angka!";
+    return;
+  }
+
+  if (tugas < 0 || uts < 0 || uas < 0) {
+    errorDiv.innerHTML = "⚠️ Nilai tidak boleh negatif!";
+    return;
+  }
+
+  let hasil = (tugas * 0.3) + (uts * 0.3) + (uas * 0.4);
+
+  hasilDiv.innerHTML = "🎓 Nilai Akhir: " + hasil.toFixed(2);
+});
+</script>
 
 </body>
 </html>
