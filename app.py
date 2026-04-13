@@ -9,11 +9,12 @@ def index():
 
     if request.method == "POST":
         try:
-            laju = float(request.form["laju"])
-            durasi = float(request.form["durasi"])
+            tugas = float(request.form["tugas"])
+            uts = float(request.form["uts"])
+            uas = float(request.form["uas"])
 
-            # Perhitungan
-            hasil = laju * durasi
+            # Perhitungan nilai akhir
+            hasil = (tugas * 0.3) + (uts * 0.3) + (uas * 0.4)
 
         except ValueError:
             error = "Input tidak valid! Masukkan angka yang benar."
