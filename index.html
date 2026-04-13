@@ -1,0 +1,130 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8">
+  <title>Kalkulator Jarak</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      background: url('https://picsum.photos/1200/800') no-repeat center/cover;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      height: 100vh;
+    }
+
+    .container {
+      background: rgba(255, 255, 255, 0.95);
+      padding: 25px;
+      border-radius: 15px;
+      width: 350px;
+      text-align: center;
+      box-shadow: 0 4px 15px rgba(0,0,0,0.3);
+    }
+
+    h1 {
+      margin-bottom: 10px;
+    }
+
+    p {
+      font-size: 14px;
+      color: #555;
+    }
+
+    .input-group {
+      text-align: left;
+      margin-top: 15px;
+    }
+
+    label {
+      font-size: 14px;
+      font-weight: bold;
+    }
+
+    input {
+      width: 100%;
+      padding: 10px;
+      margin-top: 5px;
+      border-radius: 8px;
+      border: 1px solid #ccc;
+    }
+
+    button {
+      width: 100%;
+      margin-top: 20px;
+      padding: 12px;
+      background: #28a745;
+      color: white;
+      border: none;
+      border-radius: 8px;
+      font-size: 16px;
+      cursor: pointer;
+    }
+
+    button:hover {
+      background: #218838;
+    }
+
+    .result {
+      margin-top: 15px;
+      font-size: 18px;
+      font-weight: bold;
+      color: #007bff;
+    }
+
+    .error {
+      color: red;
+      margin-top: 10px;
+    }
+  </style>
+</head>
+<body>
+
+<div class="container">
+  <h1>Hitung Jarak</h1>
+  <p>Gunakan rumus: Jarak = Laju × Waktu</p>
+
+  <div class="input-group">
+    <label>Laju (km/jam)</label>
+    <input type="number" id="laju" placeholder="Contoh: 60">
+  </div>
+
+  <div class="input-group">
+    <label>Waktu (jam)</label>
+    <input type="number" id="waktu" placeholder="Contoh: 2">
+  </div>
+
+  <button onclick="hitung()">Hitung Jarak</button>
+
+  <div class="result" id="hasil"></div>
+  <div class="error" id="error"></div>
+</div>
+
+<script>
+  function hitung() {
+    let laju = document.getElementById("laju").value;
+    let waktu = document.getElementById("waktu").value;
+    let hasil = document.getElementById("hasil");
+    let error = document.getElementById("error");
+
+    hasil.innerHTML = "";
+    error.innerHTML = "";
+
+    if (laju === "" || waktu === "") {
+      error.innerHTML = "⚠️ Harap isi semua kolom!";
+      return;
+    }
+
+    if (laju < 0 || waktu < 0) {
+      error.innerHTML = "⚠️ Nilai tidak boleh negatif!";
+      return;
+    }
+
+    let jarak = laju * waktu;
+
+    hasil.innerHTML = "📍 Jarak yang ditempuh: " + jarak + " km";
+  }
+</script>
+
+</body>
+</html>
