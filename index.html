@@ -2,7 +2,8 @@
 <html lang="id">
 <head>
   <meta charset="UTF-8">
-  <title>Kalkulator Jarak</title>
+  <title>Kalkulator Nilai Mahasiswa</title>
+
   <style>
     body {
       font-family: Arial, sans-serif;
@@ -78,53 +79,47 @@
     }
   </style>
 </head>
+
 <body>
 
 <div class="container">
-  <h1>Hitung Jarak</h1>
-  <p>Gunakan rumus: Jarak = Laju × Waktu</p>
+  <h1>Nilai Akhir Mahasiswa</h1>
+  <p>Rumus: (Tugas 30%) + (UTS 30%) + (UAS 40%)</p>
 
-  <div class="input-group">
-    <label>Laju (km/jam)</label>
-    <input type="number" id="laju" placeholder="Contoh: 60">
-  </div>
+  <form method="POST">
 
-  <div class="input-group">
-    <label>Waktu (jam)</label>
-    <input type="number" id="waktu" placeholder="Contoh: 2">
-  </div>
+    <div class="input-group">
+      <label>Nilai Tugas</label>
+      <input type="number" name="tugas" placeholder="Contoh: 80" required>
+    </div>
 
-  <button onclick="hitung()">Hitung Jarak</button>
+    <div class="input-group">
+      <label>Nilai UTS</label>
+      <input type="number" name="uts" placeholder="Contoh: 75" required>
+    </div>
 
-  <div class="result" id="hasil"></div>
-  <div class="error" id="error"></div>
+    <div class="input-group">
+      <label>Nilai UAS</label>
+      <input type="number" name="uas" placeholder="Contoh: 90" required>
+    </div>
+
+    <button type="submit">Hitung Nilai</button>
+
+  </form>
+
+  {% if hasil is not none %}
+    <div class="result">
+      🎓 Nilai Akhir: {{ hasil }}
+    </div>
+  {% endif %}
+
+  {% if error %}
+    <div class="error">
+      ⚠️ {{ error }}
+    </div>
+  {% endif %}
+
 </div>
-
-<script>
-  function hitung() {
-    let laju = document.getElementById("laju").value;
-    let waktu = document.getElementById("waktu").value;
-    let hasil = document.getElementById("hasil");
-    let error = document.getElementById("error");
-
-    hasil.innerHTML = "";
-    error.innerHTML = "";
-
-    if (laju === "" || waktu === "") {
-      error.innerHTML = "⚠️ Harap isi semua kolom!";
-      return;
-    }
-
-    if (laju < 0 || waktu < 0) {
-      error.innerHTML = "⚠️ Nilai tidak boleh negatif!";
-      return;
-    }
-
-    let jarak = laju * waktu;
-
-    hasil.innerHTML = "📍 Jarak yang ditempuh: " + jarak + " km";
-  }
-</script>
 
 </body>
 </html>
